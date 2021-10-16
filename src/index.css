@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
 
 :root{
-  --primary: #efb6b2;
+  --primary: #000000;
   --secondary: #4e4e4e;
   --error: #ff4a4a;
 }
 
 /* base styles & title */
 body{
-  font-family: "Noto Serif";
+  font-family: "Proxima Nova";
   color: var(--secondary);
+  background-color: cornsilk;
+  
 }
 .App{
   max-width: 960px;
@@ -17,9 +19,9 @@ body{
 }
 .title h1{
   color: var(--primary);
-  font-size: 1.2rem;
+  font-size: 5;
   letter-spacing: 2px;
-  font-weight: normal;
+  font-weight: bold;
 }
 .title h2, .title p{
   text-align: center;
@@ -27,6 +29,11 @@ body{
 .title h2{
   margin-top: 60px;
   font-size: 2.6rem;
+}
+.title p{
+
+  color: black;
+
 }
 
 /* upload form styles */
