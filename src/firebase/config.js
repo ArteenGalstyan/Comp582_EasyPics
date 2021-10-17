@@ -3,23 +3,20 @@ import 'firebase/storage';
 import 'firebase/firestore';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyBAlnwYYMqAwAWne0df49gaHx6S90mQLMQ",
-    authDomain: "amazing-albums.firebaseapp.com",
-    projectId: "amazing-albums",
-    storageBucket: "amazing-albums.appspot.com",
-    messagingSenderId: "650730149823",
-    appId: "1:650730149823:web:fb08042cd274b155d5730a",
-    measurementId: "G-84ZFDZXG1Y"
-  };
+  apiKey: "AIzaSyDC6zk8BnMpNVERZPqif8wUrJcOv50ZqoM",
+  authDomain: "easypics-19794.firebaseapp.com",
+  projectId: "easypics-19794",
+  storageBucket: "easypics-19794.appspot.com",
+  messagingSenderId: "875697221819",
+  appId: "1:875697221819:web:6aa4a8ebcb0834d1eb799e",
+  measurementId: "G-XGQ06HKR4W"
+};
 
-  // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
 
 const projectStorage = firebase.storage();
 const projectFirestore = firebase.firestore();
+const timestamp = firebase.firestore.FieldValue.serverTimestamp;
 
-export{
-
-    projectStorage,projectFirestore
-
-  }
+export { projectStorage, projectFirestore, timestamp };
