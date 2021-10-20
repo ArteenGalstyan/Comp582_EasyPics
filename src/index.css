@@ -39,7 +39,7 @@ form {
 label input {
   height: 0;
   width: 0;
-  opacity: 0;
+  opacity: 0.33;
 }
 label {
   display: block;
@@ -52,6 +52,7 @@ label {
   color: var(--primary);
   font-weight: bold;
   font-size: 24px;
+  background-color: white;
 }
 label:hover {
   background: var(--primary);
