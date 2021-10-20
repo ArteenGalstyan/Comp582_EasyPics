@@ -1,11 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import DeleteForm from './DeleteForm';
 
-const Modal = ({ setSelectedImg, selectedImg }) => {
+const Modal = ({  selectedImg, setSelectedImg, selectedImgId, setSelectedImgId }) => {
 
   const handleClick = (e) => {
     if (e.target.classList.contains('backdrop')) {
       setSelectedImg(null);
+      setSelectedImgId(null);
     }
   }
 
@@ -18,6 +20,7 @@ const Modal = ({ setSelectedImg, selectedImg }) => {
         initial={{ y: "-100vh" }}
         animate={{ y: 0 }}
       />
+      <DeleteForm selectedImgId={selectedImgId} setSelectedImg={setSelectedImg} setSelectedImgId={setSelectedImgId} />
     </motion.div>
   )
 }
