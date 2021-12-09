@@ -17,7 +17,8 @@ const DeleteForm = ({selectedImgId, setSelectedImg, setSelectedImgId}) => {
   return (
     <form>
       <label>
-        <span onClick={handleChange}>-</span>
+        <input onClick={handleChange} />
+        <span>-</span>
       </label>
     </form>
   );
