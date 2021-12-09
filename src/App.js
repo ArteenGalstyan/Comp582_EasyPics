@@ -1,21 +1,41 @@
-import React, { useState } from 'react';
-import Title from './comps/Title';
-import UploadForm from './comps/UploadForm';
-import ImageGrid from './comps/ImageGrid';
-import Modal from './comps/Modal';
+import React, {useState, useEffect} from 'react';
+import 'bootswatch/dist/minty/bootstrap.min.css';
+import Navbar from './comps/Navbar';
+import {Route,Routes} from "react-router-dom";
+import Photos from './comps/Photos';
+import Albums from './comps/Albums';
+import Signin from './comps/Signin';
+import AlbumCard from './comps/AlbumCard';
+import {projectFirestore} from './firebase/config';
 
 function App() {
-  const [selectedImg, setSelectedImg] = useState(null);
-  const [selectedImgId, setSelectedImgId] = useState(null);
+  
+  const [albums, setAlbums] = useState([]);
+
+  useEffect(() => {
+    const unmount = projectFirestore.collection("albums").onSnapshot((snapshot) => {
+      const tempAlbums = [];
+      snapshot.forEach((doc) => {
+        tempAlbums.push({ ...doc.data(), id: doc.id });
+      });
+      setAlbums(tempAlbums);
+    });
+    return unmount;
+  }, []);
 
   return (
     <div className="App">
-      <Title/>
-      <UploadForm />
-      <ImageGrid setSelectedImg={setSelectedImg} setSelectedImgId={setSelectedImgId} />
-      { selectedImg && (
-        <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} selectedImgId={selectedImgId} setSelectedImgId={setSelectedImgId} />
-      )}
+     
+      <Navbar />
+      <div className="container">
+      <Routes>
+      <Route exact path="/" element={<Signin />}></Route>
+      <Route path="/photos" element={<Photos />}></Route>
+      <Route exact path="/albums" element={<Albums albums={albums}/>}/>
+      <Route path="/:album" element={<AlbumCard />} />
+      </Routes>
+      </div>
+    
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ProgressBar from './ProgressBar';
 
-const UploadForm = ({collection}) => {
+const NewPhoto = ({collection}) => {
   const [file, setFile] = useState(null);
   const [error, setError] = useState(null);
 
@@ -34,4 +34,4 @@ const UploadForm = ({collection}) => {
   );
 }
 
-export default UploadForm;
+export default NewPhoto;
