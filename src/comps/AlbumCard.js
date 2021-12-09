@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
-import { useRouteMatch, Link } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import { NewPhoto } from "./NewPhoto";
 import { projectFirestore } from "../firebase/config";
+import UploadForm from "./UploadForm";
+import ImageGrid from "./ImageGrid";
+import Modal from "./Modal";
 
 export default function AlbumCard()  {
+  const [selectedImg, setSelectedImg] = useState(null);
+  const [selectedImgId, setSelectedImgId] = useState(null);
   const [images, setImages] = useState([]);
   const [albumName, setAlbumName] = useState("");
+  const collection = "images";
 
-  const match = useRouteMatch("/:album");
+  const match = useMatch("/:album");
   const { album } = match.params;
 
   useEffect(() => {
@@ -21,21 +27,13 @@ export default function AlbumCard()  {
   }, []);
 
   return (
-    <>
-      <section>
-        <header>
-          <h1>{albumName}</h1>
-          <p>Go to the <Link to="/">Home page</Link></p>
-        </header>
-        {images.map((image) => (
-          <aside key={image.name}>
-            <img src={image.url} alt="album" />
-          </aside>
-        ))}
-      </section>
-      <footer>
-        <NewPhoto currentAlbum={album} />
-      </footer>
-    </>
+    <div className="title">
+      <h2>{albumName}</h2>
+      <UploadForm collection={collection} />
+      <ImageGrid setSelectedImg={setSelectedImg} setSelectedImgId={setSelectedImgId} />
+      { selectedImg && (
+        <Modal selectedImg={selectedImg} setSelectedImg={setSelectedImg} selectedImgId={selectedImgId} setSelectedImgId={setSelectedImgId} />
+      )}
+    </div>
   );
 };

@@ -1,22 +1,33 @@
-import React from 'react';
-import useFirestore from '../hooks/useFirestore';
+import React, { useState } from 'react';
 import { NewAlbumForm } from './NewAlbumForm';
-import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { projectFirestore } from '../firebase/config';
 
-export default function Albums() {
-    const { docs } = useFirestore('albums');
+export default function Albums({albums}) {
 
     return (
-      <main style={{ padding: "1rem 0" }}>
-        <h2>Your Albums</h2>
+      <main>
+        <div className="title" style={{ padding: "1rem 0" }}>
+            <h2>Your Albums</h2>
+        </div>
         <NewAlbumForm />
-        {docs && docs.map(doc => (
-        <motion.div className="img-wrap" key={doc.name} 
-          layout
-          whileHover={{ opacity: 1 }}s
-        >
-        </motion.div>
+        <section>
+        {albums.map((album) => (
+        <>
+        <div class="card border-secondary mb-3" style={{maxWidth: 250}}>
+            <h3 class="card-header">{album.name}</h3>
+                <div class="card-body">
+                <Link to={`/${album.id}`}>
+                    <aside key={album.name}>
+                    <img src={album.images ? album.images[0].url : ""} alt="album" />
+                    </aside>
+                </Link>
+                <button type="button" class="btn btn-outline-secondary" >Delete</button>
+                </div>
+        </div>
+        </>
         ))}
+      </section>
       </main>
     );
 
